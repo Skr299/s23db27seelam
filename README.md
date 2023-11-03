@@ -1,7 +1,7 @@
 # f23wb27seelam
 Working with the pug environment on new repository
 
-[Render Link](https://f2wb27seelam.onrender.com)
+[Render Link](https://s23db27seelam.onrender.com)
 
 RestaurantsData
 - Restaurant_type(string)
