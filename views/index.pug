@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to Sai Krishna Reddy web application page working on pug within this lab #{title}
+
+  button(type="button", class="btn btn-success" onClick="goFaster()") Press  me
+  br
+  br
+  div(id="faster") Increase the speed
+  br
+  script.
+
+    var mph=20;
+    var change=1;
+    function goFaster() {
+      mph =mph + change ;
+      change =change +1;
+      document.getElementById("faster").innerHTML=`MPH ${mph} with change ${change}.`;
+    }
+  hr
+  a(href='/restaurants') Restaurant_Link
