@@ -4,11 +4,64 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config();
+const connectionString =
+process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString);
+
+var db = mongoose.connection;
+// Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function() {
+  console.log("Connection to DB succeeded");
+});
+var restaurants = require("./models/restaurants");
+
+// We can seed the collection if needed on 
+async function recreateDB(){
+ // Delete everything
+ await restaurants.deleteMany();
+
+ let instance1 = new 
+ restaurants({restaurants_type:"Indian", address:'315 s main', 
+rating:4});
+ instance1.save().then(doc=>{
+ console.log("First object saved")}
+ ).catch(err=>{
+ console.error(err)
+ });
+
+ let instance2 = new 
+ restaurants({restaurants_type:"Italian", address:'312 S main', 
+rating:3});
+ instance2.save().then(doc=>{
+ console.log("Second object saved")}
+ ).catch(err=>{
+ console.error(err)
+ });
+
+ let instance3 = new 
+ restaurants({restaurants_type:"Mexican", address:'313 N main', 
+rating:2});
+ instance3.save().then(doc=>{
+ console.log("Third object saved")}
+ ).catch(err=>{
+ console.error(err)
+ });
+
+}
+let reseed = true;
+if (reseed) {recreateDB();}
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const restaurantsRoute = require('./routes/restaurants'); 
 const boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
+var resourceRouter = require('./routes/resource');
+
 
 var app = express();
 
@@ -27,6 +80,8 @@ app.use('/users', usersRouter);
 app.use('/restaurants', restaurantsRoute); 
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
+app.use('/resource', resourceRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
