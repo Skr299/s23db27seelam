@@ -3,6 +3,7 @@ const restaurants_controlers= require('../controllers/restaurants');
 var router = express.Router();
 /* GET restaurantss */
 router.get('/', restaurants_controlers.restaurants_view_all_Page );
+router.get('/restaurants/:id', restaurants_controlers.restaurants_detail);
 module.exports = router;
 
 // const express = require('express');
