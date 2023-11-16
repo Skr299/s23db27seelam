@@ -7,19 +7,21 @@ block content
   - let address = toShow.address
   - let rating = toShow.rating
 
-  div
-    div.row
-      div(class='restaurantsAttr mr-3') restaurants ID is:
-      div #{restaurantsid}
+  div.container.mt-4
+    table.table.table-bordered
+      tbody
+        tr
+          th(style='color: #007BFF;') Restaurants ID:
+          td(style='color: #343a40;') #{restaurantsid}
 
-    div.row
-      div(class='restaurantsAttr mr-3') restaurants Type is:
-      div #{restaurants_type}
+        tr
+          th(style='color: #28a745;') Restaurants Type:
+          td(style='color: #343a40;') #{restaurants_type}
 
-    div.row
-      div(class='restaurantsAttr mr-3') restaurants address is:
-      div #{address}
+        tr
+          th(style='color: #dc3545;') Restaurants Address:
+          td(style='color: #343a40;') #{address}
 
-    div.row
-      div(class='restaurantsAttr mr-3') restaurants rating is:
-      div #{rating}
+        tr
+          th(style='color: #ffc107;') Restaurants Rating:
+          td(style='color: #343a40;') #{rating}
