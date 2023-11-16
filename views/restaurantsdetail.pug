@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1= title
+  - let restaurantsid = toShow._id
+  - let restaurants_type = toShow.restaurants_type
+  - let address = toShow.address
+  - let rating = toShow.rating
+
+  div
+    div.row
+      div(class='restaurantsAttr mr-3') restaurants ID is:
+      div #{restaurantsid}
+
+    div.row
+      div(class='restaurantsAttr mr-3') restaurants Type is:
+      div #{restaurants_type}
+
+    div.row
+      div(class='restaurantsAttr mr-3') restaurants address is:
+      div #{address}
+
+    div.row
+      div(class='restaurantsAttr mr-3') restaurants rating is:
+      div #{rating}

@@ -98,3 +98,73 @@ exports.restaurants_update_put = async function(req, res) {
    failed`);
     }
    };
+
+   // Handle restaurants delete on DELETE.
+exports.restaurants_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await restaurants.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
+
+   // Handle a show one view with id specified by query
+exports.restaurants_view_one_Page = async function(req, res) {
+ console.log("single view for id " + req.query.id)
+ try{
+ result = await restaurants.findById( req.query.id)
+ res.render('restaurantsdetail', 
+{ title: 'restaurants Detail', toShow: result });
+ }
+ catch(err){
+ res.status(500)
+ res.send(`{'error': '${err}'}`);
+ }
+};
+   
+// Handle building the view for creating a restaurants.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.restaurants_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('restaurantscreate', { title: 'restaurants Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+
+// Handle building the view for updating a restaurants.
+// query provides the id
+exports.restaurants_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await restaurants.findById(req.query.id)
+    res.render('restaurantsupdate', { title: 'restaurants Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+// Handle a delete one view with id from query
+exports.restaurants_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await restaurants.findById(req.query.id)
+    res.render('restaurantsdelete', { title: 'restaurants Delete', toShow: 
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
